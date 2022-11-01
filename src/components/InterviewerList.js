@@ -11,8 +11,8 @@ export default function DayList(props) {
       <InterviewerListItem
       {...interviewer}
       key = {interviewer.id}
-      selected={interviewer.id === props.interviewer}
-      setInterviewer={() => props.setInterviewer(interviewer.id)}
+      selected={interviewer.id === props.value}
+      setInterviewer={() => props.onChange(interviewer.id)}
       />
     )
   })
