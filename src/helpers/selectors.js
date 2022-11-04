@@ -18,15 +18,13 @@ export function getAppointmentsForDay(state, day) {
 };
 
 export function getInterview(state, interview) {
-  let finalInterview = interview
-  if (finalInterview === null) return null;
-  for (let interviewer in state.interviewers) {
-    if (Number(interviewer) === finalInterview.interviewer) {
-      finalInterview.interviewer = state.interviewers[interviewer];
-      return finalInterview;
-    }
-  }
-};
+  if (!interview) return null;
+  const finalInterview = {
+    student: interview.student,
+    interviewer: state.interviewers[interview.interviewer],
+  };
+  return finalInterview;
+}
 
 export function getInterviewersForDay(state, day) {
   let interviewerList = [];
