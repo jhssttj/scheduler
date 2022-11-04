@@ -14,6 +14,16 @@ export function getAppointmentsForDay(state, day) {
       }
     }
   })  
-
   return finalAppointmentList;
-}
+};
+
+export function getInterview(state, interview) {
+  let finalInterview = interview
+  if (finalInterview === null) return null;
+  for (let interviewer in state.interviewers) {
+    if (Number(interviewer) === finalInterview.interviewer) {
+      finalInterview.interviewer = state.interviewers[interviewer];
+      return finalInterview;
+    }
+  }
+};
