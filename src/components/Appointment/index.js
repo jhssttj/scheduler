@@ -6,11 +6,15 @@ import Header from "components/Appointment/Header.js";
 import Empty from "components/Appointment/Empty.js";
 import Show from "components/Appointment/Show.js";
 import Form from "components/Appointment/Form.js";
+import Status from "components/Appointment/Status.js";
+import Error from "components/Appointment/Error.js";
 import useVisualMode from "../../hooks/useVisualMode";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const SAVING = "SAVING";
+const ERROR = "ERROR";
 
 
 
@@ -25,7 +29,14 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    props.bookInterview(props.id, interview);
+    transition(SAVING);
+    props.bookInterview(props.id, interview)
+      .then(() => {
+        transition(SHOW);
+      })
+      .catch(() => {
+        transition(ERROR, true);
+      })
   }
 
   return (
@@ -45,6 +56,8 @@ export default function Appointment(props) {
         onSave = {(name, interviewer)=> save(name, interviewer)}
        />
       )}
+      {mode === SAVING && <Status message = "Saving"/>}
+      {mode === ERROR && <Error message = "Error"/>}
     </article>
   );
 }

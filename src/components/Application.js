@@ -33,7 +33,23 @@ useEffect(() => {
 },[]);
 
 function bookInterview(id, interview) {
-  console.log(id, interview);
+  const appointment = {
+    ...state.appointments[id],
+    interview: { ...interview }
+  };
+  const appointments = {
+    ...state.appointments,
+    [id]: appointment
+  };
+  setState({
+    ...state,
+    appointments
+  });
+  return axios.put(`/api/appointments/${id}`, {interview})
+  .then (() => {
+    setState(prev => ({...prev, appointments: appointments}))
+  })
+  .catch(() => console.log("204 No Content response"));
 }
 
   return (
