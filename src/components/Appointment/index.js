@@ -11,8 +11,8 @@ import Error from "components/Appointment/Error.js";
 import Confirm from "components/Appointment/Confirm.js";
 import useVisualMode from "../../hooks/useVisualMode";
 
-const EMPTY = "EMPTY";
 const SHOW = "SHOW";
+const EMPTY = "EMPTY";
 const CREATE = "CREATE";
 const EDIT = "EDIT";
 const SAVING = "SAVING";
