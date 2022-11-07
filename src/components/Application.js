@@ -52,6 +52,40 @@ function bookInterview(id, interview) {
   .catch(() => console.log("204 No Content response"));
 }
 
+function cancelInterview(id, interview) {
+  const appointment = {
+    ...state.appointments[id],
+    interview: { ...interview }
+  };
+  const appointments = {
+    ...state.appointments,
+    [id]: appointment
+  };
+  setState({
+    ...state,
+    appointments
+  });
+  return axios.delete(`/api/appointments/${id}`)
+  .then (() => {
+    setState(prev => ({...prev, appointments: appointments}))
+  })
+  .catch(() => console.log("204 No Content response"));
+}
+
+const schedule = dailyAppointments.map((appointment) => {
+  const interview = getInterview(state, appointment.interview);
+  return (
+    <Appointment 
+    key={appointment.id}
+    id={appointment.id}
+    time={appointment.time}
+    interview={interview}
+    interviewers = {interviewers}
+    bookInterview = {bookInterview}
+    cancelInterview = {cancelInterview}
+    />)
+})
+
   return (
     <main className="layout">
       <section className="sidebar">
@@ -75,19 +109,7 @@ function bookInterview(id, interview) {
         {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       </section>
       <section className="schedule">
-        {Object.values(dailyAppointments).map((appointment) => {
-          const interview = getInterview(state, appointment.interview);
-          return (
-            <Appointment 
-            key={appointment.id}
-            id={appointment.id}
-            time={appointment.time}
-            interview={interview}
-            interviewers = {interviewers}
-            bookInterview = {bookInterview}
-            />
-          )}
-        )}
+        {schedule}
         <Appointment key="last" time="5pm" />
       </section>
     </main>

@@ -8,6 +8,7 @@ import Show from "components/Appointment/Show.js";
 import Form from "components/Appointment/Form.js";
 import Status from "components/Appointment/Status.js";
 import Error from "components/Appointment/Error.js";
+import Confirm from "components/Appointment/Confirm.js";
 import useVisualMode from "../../hooks/useVisualMode";
 
 const EMPTY = "EMPTY";
@@ -15,6 +16,8 @@ const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
 const ERROR = "ERROR";
+const CONFIRM = "CONFIRM";
+const DELETING = "DELETING";
 
 
 
@@ -39,6 +42,23 @@ export default function Appointment(props) {
       })
   }
 
+  
+  function deleter() {
+    const interview = null;
+    transition(DELETING);
+    props.cancelInterview(props.id, interview)
+    .then(() => {
+      transition(EMPTY);
+    })
+    .catch(() => {
+      transition(ERROR, true);
+    })
+  }
+  
+  function confirm() {
+    transition(CONFIRM)
+  };
+
   return (
     <article className="appointment">
       <Header time = {props.time} />
@@ -47,6 +67,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
+          onDelete = {() => confirm()}
         />
       )}
       {mode === CREATE && (
@@ -57,7 +78,15 @@ export default function Appointment(props) {
        />
       )}
       {mode === SAVING && <Status message = "Saving"/>}
-      {mode === ERROR && <Error message = "Error"/>}
+      {mode === DELETING && <Status message = "DELETING"/>}
+      {mode === ERROR && <Error message = "Error, something went wrong..."/>}
+      {mode === CONFIRM && (
+      <Confirm 
+      message = "Delete interview?"
+      onCancel = {()=> back()}
+      onConfirm = {() => deleter()}
+      />
+      )}
     </article>
   );
 }
