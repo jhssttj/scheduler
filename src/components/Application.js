@@ -32,6 +32,10 @@ useEffect(() => {
   })
 },[]);
 
+function bookInterview(id, interview) {
+  console.log(id, interview);
+}
+
   return (
     <main className="layout">
       <section className="sidebar">
@@ -64,6 +68,7 @@ useEffect(() => {
             time={appointment.time}
             interview={interview}
             interviewers = {interviewers}
+            bookInterview = {bookInterview}
             />
           )}
         )}
