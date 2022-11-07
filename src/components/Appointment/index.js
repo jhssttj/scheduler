@@ -16,9 +16,10 @@ const SHOW = "SHOW";
 const CREATE = "CREATE";
 const EDIT = "EDIT";
 const SAVING = "SAVING";
-const ERROR = "ERROR";
 const CONFIRM = "CONFIRM";
 const DELETING = "DELETING";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 
 
@@ -39,7 +40,7 @@ export default function Appointment(props) {
         transition(SHOW);
       })
       .catch(() => {
-        transition(ERROR, true);
+        transition(ERROR_SAVE, true);
       })
   }
 
@@ -48,14 +49,13 @@ export default function Appointment(props) {
   }
   
   function deleter() {
-    const interview = null;
-    transition(DELETING);
-    props.cancelInterview(props.id, interview)
+    transition(DELETING, true);
+    props.cancelInterview(props.id)
     .then(() => {
       transition(EMPTY);
     })
     .catch(() => {
-      transition(ERROR, true);
+      transition(ERROR_DELETE, true);
     })
   }
   
@@ -93,7 +93,18 @@ export default function Appointment(props) {
       )}
       {mode === SAVING && <Status message = "Saving"/>}
       {mode === DELETING && <Status message = "DELETING"/>}
-      {mode === ERROR && <Error message = "Error, something went wrong..."/>}
+      {mode === ERROR_SAVE && (
+      <Error 
+      message = "Something went wrong while saving" 
+      onClose = {() => back()}
+      />
+      )}
+     {mode === ERROR_DELETE && (
+      <Error 
+      message = "Something went wrong while deleting" 
+      onClose = {() => back()}
+      />
+      )}
       {mode === CONFIRM && (
       <Confirm 
       message = "Delete interview?"

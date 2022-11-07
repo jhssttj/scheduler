@@ -41,15 +41,10 @@ function bookInterview(id, interview) {
     ...state.appointments,
     [id]: appointment
   };
-  setState({
-    ...state,
-    appointments
-  });
   return axios.put(`/api/appointments/${id}`, {interview})
   .then (() => {
     setState(prev => ({...prev, appointments: appointments}))
   })
-  .catch(() => console.log("204 No Content response"));
 }
 
 function cancelInterview(id, interview) {
@@ -61,15 +56,10 @@ function cancelInterview(id, interview) {
     ...state.appointments,
     [id]: appointment
   };
-  setState({
-    ...state,
-    appointments
-  });
   return axios.delete(`/api/appointments/${id}`)
   .then (() => {
     setState(prev => ({...prev, appointments: appointments}))
   })
-  .catch(() => console.log("204 No Content response"));
 }
 
 const schedule = dailyAppointments.map((appointment) => {
