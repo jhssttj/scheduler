@@ -6,7 +6,17 @@ The application was created by using React, Javascript, AXIOS, HTML, Express, No
 > This project is intended to be a proof of concept, and therefore should not be hosted or used as a stand-alone website.
 
 # Screenshots
+![A screenshot of inputting student name and interviewer choice at a selected timeslot](https://github.com/jhssttj/scheduler/blob/master/public/images/images-README/Scheduler-Pic-1.PNG?raw=true)
+Image 1: A screen shot of inputting student name and interviewer of choice in a given timeslot.
 
+![A screenshot of the process of saving an appointment](https://github.com/jhssttj/scheduler/blob/master/public/images/images-README/Scheduler-Pic-2.PNG?raw=true)
+Image 2: Once a user saves their appointment, a saving state will show that their appointment is being booked.
+
+![A screenshot to confirm delete of appointment](https://github.com/jhssttj/scheduler/blob/master/public/images/images-README/Scheduler-Pic-3.PNG?raw=true)
+Image 3: If a user decides to delete their appointment, a confirmation box will show.
+
+![A screenshot of the process of deleting an appointment](https://github.com/jhssttj/scheduler/blob/master/public/images/images-README/Scheduler-Pic-4.PNG?raw=true)
+Image 4: Once a user deletes their appointment, a deleting state will show that their appointment is being deleted.
 
 # Features
 1. Located to the left is the navigation panel where users can click on the days they want to book an appointment (Note: Each days show how many spots are available for that day).
