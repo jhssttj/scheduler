@@ -5,7 +5,7 @@ export function getAppointmentsForDay(state, day) {
     if (apptDay.name === day) {
       appointmentList = apptDay.appointments;
     }
-  };
+  }
 
   let finalAppointmentList = appointmentList.map((id) => {
     for (let appointment in state.appointments) {
@@ -13,9 +13,9 @@ export function getAppointmentsForDay(state, day) {
         return state.appointments[appointment];
       }
     }
-  })  
+  });
   return finalAppointmentList;
-};
+}
 
 export function getInterview(state, interview) {
   if (!interview) return null;
@@ -33,7 +33,7 @@ export function getInterviewersForDay(state, day) {
     if (interviewerDay.name === day) {
       interviewerList = interviewerDay.interviewers;
     }
-  };
+  }
 
   let finalInterviewerList = interviewerList.map((id) => {
     for (let interviewer in state.interviewers) {
@@ -41,6 +41,6 @@ export function getInterviewersForDay(state, day) {
         return state.interviewers[interviewer];
       }
     }
-  })  
+  });
   return finalInterviewerList;
-};
+}

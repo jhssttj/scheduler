@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from 'axios';
 
-export default function useApplicationData(initial) {
+export default function useApplicationData() {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -21,9 +21,9 @@ export default function useApplicationData(initial) {
       }
       day.spots = spots;
       return day;
-    })
+    });
     return days;
-  }
+  };
 
   function bookInterview(id, interview) {
     const appointment = {
@@ -35,11 +35,11 @@ export default function useApplicationData(initial) {
       [id]: appointment
     };
     return axios.put(`/api/appointments/${id}`, {interview})
-    .then (() => {
-      const days = updateSpots(state, appointments)
-      setState(prev => ({...prev, appointments: appointments, days: days}))
-    })
-  }
+      .then(() => {
+        const days = updateSpots(state, appointments);
+        setState(prev => ({...prev, appointments: appointments, days: days}));
+      });
+  };
   
   function cancelInterview(id) {
     const appointment = {
@@ -51,12 +51,11 @@ export default function useApplicationData(initial) {
       [id]: appointment
     };
     return axios.delete(`/api/appointments/${id}`)
-    .then (() => {
-      const days = updateSpots(state, appointments)
-      setState(prev => ({...prev, appointments: appointments, days: days}))
-    })
-  }
-
+      .then(() => {
+        const days = updateSpots(state, appointments);
+        setState(prev => ({...prev, appointments: appointments, days: days}));
+      });
+  };
 
   return { state, setState, setDay, bookInterview, cancelInterview };
-}
+};

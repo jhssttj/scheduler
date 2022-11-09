@@ -11,7 +11,7 @@ afterEach(cleanup);
 
 describe("Application", () => {
   
-  it("changes the schedule when a new day is selected", async () => {
+  it("changes the schedule when a new day is selected", async() => {
     const { getByText } = render(<Application />);
   
     await waitForElement(() => getByText("Monday"));
@@ -21,7 +21,7 @@ describe("Application", () => {
     expect(getByText("Leopold Silvers")).toBeInTheDocument();
   });
   
-  it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
+  it("loads data, books an interview and reduces the spots remaining for Monday by 1", async() => {
     const { container } = render(<Application />);
   
     await waitForElement(() => getByText(container, "Archie Cohen"));
@@ -49,7 +49,7 @@ describe("Application", () => {
     expect(getByText(day, "no spots remaining")).toBeInTheDocument();
   });
 
-  it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
+  it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async() => {
     // 1. Render the Application.
     const { container } = render(<Application />);
     // 2. Wait until the text "Archie Cohen" is displayed.
@@ -73,9 +73,9 @@ describe("Application", () => {
       queryByText(day, "Monday")
     );
     expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
-  })
+  });
 
-  it("loads data, edits an interview and increases keeps the spots remaining for Monday", async () => {
+  it("loads data, edits an interview and increases keeps the spots remaining for Monday", async() => {
  
     const { container } = render(<Application />);
     await waitForElement(() => getByText(container, "Archie Cohen"));
@@ -99,9 +99,9 @@ describe("Application", () => {
       queryByText(day, "Monday")
     );
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
-  })
+  });
 
-  it("shows the save error when failing to save an appointment", async () => {
+  it("shows the save error when failing to save an appointment", async() => {
     axios.put.mockRejectedValueOnce();
     const { container } = render(<Application />);
     await waitForElement(() => getByText(container, "Archie Cohen"));
@@ -118,7 +118,7 @@ describe("Application", () => {
     expect(getByText(appointment, "Error")).toBeInTheDocument();
     fireEvent.click(queryByAltText(appointment, "Close"));
     expect(getByText(appointment, "Save")).toBeInTheDocument();
-    fireEvent.click(queryByText(appointment, "Cancel"))
+    fireEvent.click(queryByText(appointment, "Cancel"));
     expect(getByText(container, "Archie Cohen")).toBeInTheDocument();
 
     const day = getAllByTestId(container, "day").find(day =>
@@ -128,7 +128,7 @@ describe("Application", () => {
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
   });
 
-  it("shows the save error when failing to delete an appointment", async () => {
+  it("shows the save error when failing to delete an appointment", async() => {
     axios.delete.mockRejectedValueOnce();
     const { container } = render(<Application />);
     await waitForElement(() => getByText(container, "Archie Cohen"));

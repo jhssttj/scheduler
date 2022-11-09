@@ -17,7 +17,7 @@ export default function Show(props) {
             src="images/edit.png"
             alt="Edit"
             onClick = {props.onEdit}
-            />
+          />
           <img
             className="appointment__actions-button"
             src="images/trash.png"
@@ -28,4 +28,4 @@ export default function Show(props) {
       </section>
     </main>
   );
-}
+};
